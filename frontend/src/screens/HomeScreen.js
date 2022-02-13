@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Product from '../components/Product';
 import axios from 'axios';
-// import products from '../products';
 
 const HomeScreen = () => {
 	const [products, setProducts] = useState([]);
