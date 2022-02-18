@@ -13,7 +13,7 @@ const Header = () => {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto' style={{ marginLeft: 'auto' }}>
-							<Link className='nav-link' to='cart'>
+							<Link className='nav-link' to='/cart'>
 								<i className='fas fa-shopping-cart'></i>Card
 							</Link>
 
