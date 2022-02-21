@@ -1,3 +1,4 @@
+import bcryptjs from 'bcryptjs';
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
@@ -27,6 +28,17 @@ const usrerSchema = new Schema(
 	}
 );
 
+usrerSchema.methods.matchPassord = async function (enteredPassword) {
+	return await bcryptjs.compare(enteredPassword, this.password);
+};
+
+usrerSchema.pre('save', async function (next) {
+	if (!this.isModified('password')) {
+		next();
+	}
+	const salt = await bcryptjs.genSalt(10);
+	this.password = await bcryptjs.hash(this.password, salt);
+});
 const User = model('User', usrerSchema);
 
 export default User;

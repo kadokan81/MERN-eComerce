@@ -1,18 +1,21 @@
-import products from './data/products.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDb from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 connectDb();
 const app = express();
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
 	res.send('API IS Running');
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 app.use((req, res, next) => {
 	const error = new Error(`NOt Found - ${req.originalUrl}`);
