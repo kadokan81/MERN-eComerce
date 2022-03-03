@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserDetails, login } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { USER_DETAILS_FAIL } from '../constants/userConstans';
 
 const ProfileScreen = () => {
 	const [name, setName] = useState('');
@@ -19,6 +20,9 @@ const ProfileScreen = () => {
 
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
+
+	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+	const { success } = userUpdateProfile;
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
@@ -39,7 +43,13 @@ const ProfileScreen = () => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		// DISPARCH UPDATE PROFILEW
-		// dispatch(login(email, password));
+		if (password !== confirmPassword) {
+			setMessage('Passort do not match');
+		} else {
+			dispatch(
+				updateUserProfile({ id: USER_DETAILS_FAIL, name, email, password })
+			);
+		}
 	};
 	return (
 		<Row>
@@ -48,6 +58,8 @@ const ProfileScreen = () => {
 					<h2> User Profile</h2>
 					{message && <Message variant='danger'>{message}</Message>}
 					{error && <Message variant='danger'>{error}</Message>}
+					{success && <Message variant='danger'>Profile Updated</Message>}
+
 					{loading && <Loader />}
 					<Form onSubmit={submitHandler}>
 						<Form.Group controlId='name'>

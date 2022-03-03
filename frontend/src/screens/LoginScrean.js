@@ -3,6 +3,7 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../actions/userActions';
+import CheckoutSteps from '../components/CheckoutSteps';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -28,6 +29,7 @@ const LoginScrean = () => {
 	};
 	return (
 		<FormContainer>
+			<CheckoutSteps step1 />
 			<h1>Sign In</h1>
 			{error && <Message variant='danger'>{error}</Message>}
 			{loading && <Loader />}
