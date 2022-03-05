@@ -18,6 +18,7 @@ import Message from '../components/Message';
 
 const PlaceOrderScreen = () => {
 	const cart = useSelector((state) => state.cart);
+	const state = useSelector((state) => state);
 
 	const addDecimals = (num) => {
 		return (Math.round(num * 100) / 100).toFixed(2);
@@ -36,6 +37,7 @@ const PlaceOrderScreen = () => {
 	const error = true;
 	const placeOrderHandler = () => {
 		console.log('place');
+		console.log(state);
 	};
 
 	return (
